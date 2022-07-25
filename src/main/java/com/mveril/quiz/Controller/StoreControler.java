@@ -2,6 +2,7 @@ package com.mveril.quiz.Controller;
 
 import com.mveril.quiz.business.Question;
 import com.mveril.quiz.business.service.QuestionStoreService;
+import com.mveril.quiz.business.service.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

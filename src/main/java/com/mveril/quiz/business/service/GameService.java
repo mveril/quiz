@@ -1,6 +1,8 @@
 package com.mveril.quiz.business.service;
 
+import com.mveril.quiz.DTO.GameQuestionDTO;
 import com.mveril.quiz.business.*;
+import com.mveril.quiz.business.service.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +12,11 @@ public class GameService {
     @Autowired
     QuestionStoreService store;
 
-    public Question GetNextQuestion(){
-        return store.getRandomQuestion();
+    @Autowired
+    QuestionMapper questionMapper;
+
+    public GameQuestionDTO GetNextQuestion(){
+        return questionMapper.toGameQuestion(store.getRandomQuestion());
     }
 
     public boolean validateAnswer(Question question, long answerId) throws AnswerNotMatchQuestionException {
