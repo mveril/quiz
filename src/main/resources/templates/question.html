@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>This is your question</title>
+</head>
+<body>
+  <h1>The quiz game</h1>
+  <h2>Question aléatoire</h2>
+  <p th:text="${question.title}"></p>
+  <ol>
+      <th:block th:each="a : ${question.answers}">
+          <li th:text="${a.title}"></li>
+      </th:block>
+  </ol>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.mveril.quiz.Controller;
+package com.mveril.quiz.Controller.api;
 
 import com.mveril.quiz.business.Question;
 import com.mveril.quiz.business.service.QuestionStoreService;

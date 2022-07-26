@@ -1,4 +1,4 @@
-package com.mveril.quiz.Controller;
+package com.mveril.quiz.Controller.api;
 
 import com.mveril.quiz.DTO.GameQuestionDTO;
 import com.mveril.quiz.business.AnswerNotMatchQuestionException;
