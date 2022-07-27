@@ -12,12 +12,14 @@
       <fieldset>
         <input type="hidden" name="question" th:value="${question.id}">
         <th:block th:each="a : ${question.answers}">
-            <input  type="radio" th:id="'rep-'+${a.id}" name="answer" th:value="${a.id}">
-            <label th:for="'rep-'+${a.id}" th:text="${a.title}"></label>
+            <input type="radio" th:id="'rep-'+${a.id}" name="answer" th:value="${a.id}">
+            <label th:style="${showResults ? 'color:'+(a.correctAnswer ? 'green' :'red'):''}" th:for="'rep-'+${a.id}" th:text="${a.title}"></label>
         </th:block>
       </fieldset>
       <input type="submit" value="Répondre">
-      <p th:text="${isGoodResult}  ? 'Bonne réponse !' : 'Mauvaise réponse'"></p>
+      <th:block th:if="${isGoodResult == true or isGoodResult == false}">
+          <p th:text="${isGoodResult}  ? 'Bonne réponse !' : 'Mauvaise réponse'"></p>
+      </th:block>
       <p style="color:red" th:text="${error}"></p>
     </form>
 </body>

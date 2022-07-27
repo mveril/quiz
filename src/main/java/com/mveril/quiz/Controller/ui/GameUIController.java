@@ -22,20 +22,21 @@ public class GameUIController {
     @GetMapping
     public String NextQuestion(Model model){
         model.addAttribute("question", gameService.GetNextQuestion());
+        model.addAttribute("showResults",false);
         return "question.html";
     }
     @PostMapping
-    public String answerQuestion(Model model,  @RequestParam Map<String, String> responseMap){
-        var qidSTR = responseMap.get("question");
-        var qid =Long.parseLong(qidSTR);
-        var aidSTR = responseMap.get("answer");
-        var aid =Long.parseLong(aidSTR);
+    public String answerQuestion(Model model,  @RequestParam(name="question") long qid, @RequestParam(name = "answer") long aid){
+        boolean showResults = false;
         try {
-            model.addAttribute("isGoodResult",gameService.validateAnswer(qid,aid));
+            var goodAnswer = gameService.validateAnswer(qid,aid);
+            showResults = goodAnswer;
+            model.addAttribute("isGoodResult", goodAnswer);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
         model.addAttribute("question",questionStoreService.getQuestionById(qid).get());
+        model.addAttribute("showResults",showResults);
         return "question.html";
     }
 }
