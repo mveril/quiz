@@ -2,7 +2,6 @@ package com.mveril.quiz.business.service;
 
 import com.mveril.quiz.business.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

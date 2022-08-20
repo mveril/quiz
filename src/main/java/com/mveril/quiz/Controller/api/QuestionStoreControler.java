@@ -2,28 +2,26 @@ package com.mveril.quiz.Controller.api;
 
 import com.mveril.quiz.business.Question;
 import com.mveril.quiz.business.service.QuestionStoreService;
-import com.mveril.quiz.business.service.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
-import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/store")
-public class StoreControler {
+@RequestMapping("api/store/questions")
+public class QuestionStoreControler {
 
     @Autowired
     QuestionStoreService questionStore;
 
-    @GetMapping("questions")
+    @GetMapping()
     public List<Question> list(){
         return questionStore.getQuestions();
     }
 
-    @DeleteMapping("questions/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity remove(@PathParam("id") long questionId){
         if(questionStore.removeQuestion(questionId)){
             return ResponseEntity.ok().build();
@@ -31,12 +29,12 @@ public class StoreControler {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("questions")
+    @PostMapping()
     public void add(@RequestBody Question question){
         questionStore.add(question);
     }
 
-    @GetMapping("questions/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Question> get(@PathParam("id") long id){
         var o = questionStore.getQuestionById(id);
         if(o.isPresent()){
@@ -46,8 +44,8 @@ public class StoreControler {
         }
     }
 
-    @PutMapping("questions/{id}")
-    public ResponseEntity get(@PathParam("id") long id, @RequestBody Question question){
+    @PutMapping("{id}")
+    public ResponseEntity put(@PathParam("id") long id, @RequestBody Question question){
         if(question.getId() != id){
             return ResponseEntity.badRequest().build();
         }
